@@ -1,0 +1,38 @@
+﻿@model IEnumerable<CMCS.Prototype.Models.ApprovalVm>
+@using CMCS.Prototype.Models
+@{
+    ViewData["Title"] = "Approvals";
+    string StatusBadge(ClaimStatus s) => s switch
+    {
+        ClaimStatus.Submitted => "info",
+        ClaimStatus.Verified => "warning",
+        ClaimStatus.Approved => "success",
+        _ => "secondary"
+    };
+}
+<h1 class="h4 mb-3">Approval Inbox</h1>
+<div class="card shadow-sm">
+    <div class="table-responsive">
+        <table class="table align-middle mb-0">
+            <thead class="table-light">
+                <tr><th>Lecturer</th><th>Stage</th><th>Status</th><th>Submitted</th><th></th></tr>
+            </thead>
+            <tbody>
+                @foreach (var a in Model)
+                {
+                    <tr>
+                        <td>@a.LecturerName</td>
+                        <td>@a.Stage</td>
+                        <td><span class="badge bg-@StatusBadge(a.Status)">@a.Status</span></td>
+                        <td>@a.SubmittedOn.ToShortDateString()</td>
+                        <td class="text-end">
+                            <a class="btn btn-sm btn-outline-secondary" asp-action="Details" asp-route-id="@a.ClaimId">View</a>
+                            <button class="btn btn-sm btn-success" disabled>Approve</button>
+                            <button class="btn btn-sm btn-danger" disabled>Reject</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

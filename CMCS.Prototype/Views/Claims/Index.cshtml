@@ -1,0 +1,49 @@
+﻿@model IEnumerable<CMCS.Prototype.Models.ClaimVm>
+@{
+    ViewData["Title"] = "My Claims";
+    string Badge(CMCS.Prototype.Models.ClaimStatus s) => s switch
+    {
+        CMCS.Prototype.Models.ClaimStatus.Draft => "secondary",
+        CMCS.Prototype.Models.ClaimStatus.Submitted => "info",
+        CMCS.Prototype.Models.ClaimStatus.Verified => "warning",
+        CMCS.Prototype.Models.ClaimStatus.Approved => "success",
+        _ => "danger"
+    };
+}
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h1 class="h4 mb-0">My Claims</h1>
+    <a class="btn btn-primary" asp-action="Create">New Claim</a>
+</div>
+
+<div class="card shadow-sm">
+    <div class="table-responsive">
+        <table class="table align-middle mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th>Lecturer</th>
+                    <th>Period</th>
+                    <th>Total Hours</th>
+                    <th>Total Amount (R)</th>
+                    <th>Status</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var c in Model)
+                {
+                    <tr>
+                        <td>@c.LecturerName</td>
+                        <td>@c.Month/@c.Year</td>
+                        <td>@c.TotalHours</td>
+                        <td>@c.TotalAmount</td>
+                        <td><span class="badge bg-@Badge(c.Status)">@c.Status</span></td>
+                        <td class="text-end">
+                            <a class="btn btn-sm btn-outline-secondary" asp-action="Details" asp-route-id="@c.ClaimId">View</a>
+                            <button class="btn btn-sm btn-outline-primary" disabled title="Prototype only">Submit</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

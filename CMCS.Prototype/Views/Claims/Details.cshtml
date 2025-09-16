@@ -1,0 +1,36 @@
+﻿@model CMCS.Prototype.Models.ClaimVm
+@{
+    ViewData["Title"] = "Claim Details";
+}
+<h1 class="h4">Claim Details</h1>
+<div class="card shadow-sm mb-3">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md"><strong>Lecturer:</strong> @Model.LecturerName</div>
+            <div class="col-md"><strong>Period:</strong> @Model.Month/@Model.Year</div>
+            <div class="col-md"><strong>Status:</strong> <span class="badge bg-warning">@Model.Status</span></div>
+        </div>
+    </div>
+</div>
+
+<div class="card shadow-sm">
+    <div class="card-body">
+        <h2 class="h6">Entries</h2>
+        <div class="table-responsive">
+            <table class="table table-sm">
+                <thead><tr><th>Date</th><th>Hours</th><th>Description</th></tr></thead>
+                <tbody>
+                    @foreach (var e in Model.Entries)
+                    {
+                        <tr><td>@e.Date</td><td>@e.Hours</td><td>@e.Description</td></tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="text-end">
+            <span class="me-3"><strong>Total Hours:</strong> @Model.TotalHours</span>
+            <span class="me-3"><strong>Rate:</strong> R @Model.HourlyRate</span>
+            <span class="me-3"><strong>Amount:</strong> R @Model.TotalAmount</span>
+        </div>
+    </div>
+</div>

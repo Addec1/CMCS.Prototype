@@ -1,0 +1,24 @@
+﻿@{
+    ViewData["Title"] = "Home";
+}
+<div class="row g-3">
+    <div class="col-md-8">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h1 class="h4 mb-3">Contract Monthly Claim System (CMCS)</h1>
+                <p class="mb-0">Prototype demonstrating the key user journeys:</p>
+                <ul class="mb-0">
+                    <li>Lecturer: create and preview a monthly claim</li>
+                    <li>Coordinator/Manager: review and approve</li>
+                    <li>Upload supporting documents</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 d-grid gap-2">
+        <a class="btn btn-primary" asp-controller="Claims" asp-action="Create">Start New Claim</a>
+        <a class="btn btn-outline-primary" asp-controller="Claims" asp-action="Index">My Claims</a>
+        <a class="btn btn-outline-secondary" asp-controller="Approvals" asp-action="Index">Approvals</a>
+        <a class="btn btn-outline-secondary" asp-controller="Documents" asp-action="Upload">Upload Document</a>
+    </div>
+</div>
